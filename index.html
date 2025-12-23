@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise Building Company Limited - Juba, South Sudan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #2C3E50;
+            --primary-medium: #34495E;
+            --primary-light: #5D6D7E;
+            --accent: #E67E22;
+            --accent-light: #F39C12;
+            --neutral-light: #F8F9FA;
+            --neutral-medium: #ECF0F1;
+            --neutral-dark: #BDC3C7;
+            --text-dark: #2C3E50;
+            --text-medium: #566573;
+            --text-light: #7F8C8D;
+            --white: #FFFFFF;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+            --border-radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-medium);
+            background-color: var(--neutral-light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-dark);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent);
+            color: var(--white);
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-light);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent);
+            color: var(--white);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            color: var(--accent);
+            font-size: 2.2rem;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .logo-text span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background-color: var(--accent);
+            bottom: -5px;
+            left: 0;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 180px 0 100px;
+            margin-top: 80px;
+        }
+
+        .hero h1 {
+            color: var(--white);
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: var(--neutral-medium);
+        }
+
+        .typing-container {
+            min-height: 60px;
+            margin-bottom: 40px;
+        }
+
+        .typing-text {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--accent-light);
+            border-right: 3px solid var(--accent);
+            padding-right: 5px;
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Services Overview */
+        .services-overview {
+            background-color: var(--white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background-color: var(--neutral-medium);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+            border-bottom: 4px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+            border-bottom-color: var(--accent);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        /* Featured Projects */
+        .featured-projects {
+            background-color: var(--neutral-light);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-tag {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--white);
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background-color: var(--white);
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 40px auto 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial {
+            background-color: var(--neutral-light);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            display: none;
+        }
+
+        .testimonial.active {
+            display: block;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .testimonial-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 30px;
+            color: var(--text-medium);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--neutral-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+
+        .testimonial-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .testimonial-controls button {
+            background-color: var(--neutral-medium);
+            border: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .testimonial-controls button.active {
+            background-color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--neutral-medium);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent);
+            bottom: -8px;
+            left: 0;
+        }
+
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .contact-info i {
+            color: var(--accent);
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        /* About Page */
+        .about-hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 140px 0 80px;
+            margin-top: 80px;
+        }
+
+        .mission-vision {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .mission-card, .vision-card {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .mission-card i, .vision-card i {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .value-card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .value-card i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        /* Services Page */
+        .services-hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1503387769-00a112127ca0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 140px 0 80px;
+            margin-top: 80px;
+        }
+
+        .services-detail {
+            background-color: var(--white);
+        }
+
+        .service-detail-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 60px;
+            align-items: center;
+        }
+
+        .service-detail-card:nth-child(even) .service-image {
+            order: 2;
+        }
+
+        .service-detail-card:nth-child(even) .service-text {
+            order: 1;
+        }
+
+        .service-image {
+            height: 350px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .service-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .service-text {
+            padding: 20px 0;
+        }
+
+        .service-text h3 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .service-text h3 i {
+            color: var(--accent);
+        }
+
+        /* Portfolio Page */
+        .portfolio-hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 140px 0 80px;
+            margin-top: 80px;
+        }
+
+        .portfolio-filter {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 25px;
+            background-color: var(--neutral-medium);
+            border: none;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--accent);
+            color: var(--white);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            position: relative;
+            height: 300px;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 25px;
+            color: var(--white);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        /* Contact Page */
+        .contact-hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1487956382158-bb926046304a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 140px 0 80px;
+            margin-top: 80px;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+
+        .contact-form {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid var(--neutral-dark);
+            border-radius: var(--border-radius);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.1);
+        }
+
+        .map-container {
+            height: 400px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            .service-detail-card {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .service-detail-card:nth-child(even) .service-image {
+                order: 1;
+            }
+            
+            .service-detail-card:nth-child(even) .service-text {
+                order: 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 15px;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 0;
+                gap: 25px;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: var(--transition);
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .typing-text {
+                font-size: 1.3rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .typing-text {
+                font-size: 1.1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+            
+            .project-card, .portfolio-item {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <div class="logo-text">Promise<span>Building</span></div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link active" data-page="home">Home</a></li>
+                <li><a href="#about" class="nav-link" data-page="about">About</a></li>
+                <li><a href="#services" class="nav-link" data-page="services">Services</a></li>
+                <li><a href="#portfolio" class="nav-link" data-page="portfolio">Portfolio</a></li>
+                <li><a href="#contact" class="nav-link" data-page="contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <section id="home" class="page active">
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="container">
+                <h1>Promise Building Company Limited</h1>
+                <div class="typing-container">
+                    <span id="typing-text" class="typing-text"></span>
+                </div>
+                <p>We are a premier construction and general trading company based in Juba, South Sudan, delivering exceptional quality and reliability for all your construction needs.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn">Contact Us</a>
+                    <a href="#services" class="btn btn-secondary">Our Services</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services Overview -->
+        <section class="services-overview">
+            <div class="container">
+                <h2>Our Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3>Building Construction</h3>
+                        <p>Residential and commercial buildings constructed with precision and quality materials.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-border-all"></i>
+                        </div>
+                        <h3>Fencing</h3>
+                        <p>Secure and durable fencing solutions for residential and commercial properties.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-truck-loading"></i>
+                        </div>
+                        <h3>Material Sales</h3>
+                        <p>High-quality building materials including blocks, sand, stones, aggregate, and marram.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <h3>Property Rentals</h3>
+                        <p>Quality houses and flats available for rent in prime locations across Juba.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-ruler-combined"></i>
+                        </div>
+                        <h3>Design Services</h3>
+                        <p>Architectural design and planning for buildings and flats tailored to your needs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Projects -->
+        <section class="featured-projects">
+            <div class="container">
+                <h2>Featured Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Residential Complex">
+                        </div>
+                        <div class="project-content">
+                            <span class="project-tag">Residential</span>
+                            <h3>Modern Residential Complex</h3>
+                            <p>A 12-unit residential complex in Juba with modern amenities and sustainable design.</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1487956382158-bb926046304a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Commercial Building">
+                        </div>
+                        <div class="project-content">
+                            <span class="project-tag">Commercial</span>
+                            <h3>Commercial Office Building</h3>
+                            <p>Three-story office building with retail space on the ground floor in central Juba.</p>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Perimeter Fencing">
+                        </div>
+                        <div class="project-content">
+                            <span class="project-tag">Fencing</span>
+                            <h3>Secure Perimeter Fencing</h3>
+                            <p>High-security fencing for a government facility with access control systems.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials">
+            <div class="container">
+                <h2>Client Testimonials</h2>
+                <div class="testimonial-slider">
+                    <div class="testimonial active" id="testimonial-1">
+                        <p class="testimonial-text">"Promise Building Company delivered our office building ahead of schedule and within budget. Their attention to detail and quality of work is exceptional."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <h4>John Deng</h4>
+                                <p>Business Owner, Juba</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial" id="testimonial-2">
+                        <p class="testimonial-text">"We hired Promise Building for our residential complex, and we were impressed with their professionalism and the quality of materials used. Highly recommended!"</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <h4>Mary Akech</h4>
+                                <p>Property Developer</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial" id="testimonial-3">
+                        <p class="testimonial-text">"The fencing project they completed for our facility is top-notch. Secure, durable, and professionally installed. We will definitely use their services again."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <h4>Peter Lual</h4>
+                                <p>Facility Manager</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-controls">
+                        <button class="testimonial-control active" data-testimonial="1"></button>
+                        <button class="testimonial-control" data-testimonial="2"></button>
+                        <button class="testimonial-control" data-testimonial="3"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- About Page -->
+    <section id="about" class="page">
+        <div class="about-hero">
+            <div class="container">
+                <h1>About Us</h1>
+                <p>Building trust and excellence in construction across South Sudan since 2010.</p>
+            </div>
+        </div>
+
+        <section class="about-content">
+            <div class="container">
+                <h2>Our Story</h2>
+                <p>Promise Building Company Limited was founded in 2010 with a vision to contribute to the development of South Sudan through quality construction and reliable trading services. Based in Juba, we have grown to become one of the most trusted names in the construction industry.</p>
+                <p>Our journey began with a small team of dedicated professionals and has expanded to include a workforce of over 100 skilled workers, engineers, and project managers. We have successfully completed over 200 projects across South Sudan, from residential buildings to commercial complexes and government facilities.</p>
+                
+                <div class="mission-vision">
+                    <div class="mission-card">
+                        <i class="fas fa-bullseye"></i>
+                        <h3>Our Mission</h3>
+                        <p>To deliver exceptional construction and trading services that exceed client expectations, contribute to national development, and build lasting relationships based on trust, quality, and reliability.</p>
+                    </div>
+                    <div class="vision-card">
+                        <i class="fas fa-eye"></i>
+                        <h3>Our Vision</h3>
+                        <p>To be the leading construction and general trading company in South Sudan, recognized for excellence, innovation, and our contribution to building sustainable communities.</p>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 60px;">Our Values</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <i class="fas fa-handshake"></i>
+                        <h3>Integrity</h3>
+                        <p>We conduct our business with honesty, transparency, and ethical practices in all our dealings.</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-medal"></i>
+                        <h3>Quality</h3>
+                        <p>We never compromise on quality, using the best materials and workmanship in every project.</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Teamwork</h3>
+                        <p>We believe in collaborative efforts, valuing each team member's contribution to our success.</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-clock"></i>
+                        <h3>Reliability</h3>
+                        <p>We deliver on our promises, meeting deadlines and maintaining consistent performance.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Services Page -->
+    <section id="services" class="page">
+        <div class="services-hero">
+            <div class="container">
+                <h1>Our Services</h1>
+                <p>Comprehensive construction and trading solutions tailored to your needs.</p>
+            </div>
+        </div>
+
+        <section class="services-detail">
+            <div class="container">
+                <div class="service-detail-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Building Construction">
+                    </div>
+                    <div class="service-text">
+                        <h3><i class="fas fa-home"></i> Building Construction</h3>
+                        <p>We specialize in constructing residential and commercial buildings of all sizes. Our team of experienced engineers, architects, and construction workers ensures that every project is completed to the highest standards of quality and safety.</p>
+                        <p>From initial planning to final completion, we manage every aspect of the construction process, including foundation work, structural framing, roofing, electrical and plumbing installations, and finishing works.</p>
+                        <ul>
+                            <li>Residential houses and apartments</li>
+                            <li>Commercial office buildings</li>
+                            <li>Retail spaces and shopping complexes</li>
+                            <li>Government and institutional buildings</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-detail-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1589519160732-57fc498494f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fencing">
+                    </div>
+                    <div class="service-text">
+                        <h3><i class="fas fa-border-all"></i> Fencing</h3>
+                        <p>We provide secure and durable fencing solutions for residential, commercial, and industrial properties. Our fencing services include design, installation, and maintenance of various fencing types to meet your security and aesthetic needs.</p>
+                        <p>Our team uses high-quality materials and modern techniques to ensure that your fence is not only functional but also enhances the appearance of your property.</p>
+                        <ul>
+                            <li>Perimeter security fencing</li>
+                            <li>Decorative garden fencing</li>
+                            <li>Chain link fencing</li>
+                            <li>Electric fencing systems</li>
+                            <li>Gate installation and automation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-detail-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Building Materials">
+                    </div>
+                    <div class="service-text">
+                        <h3><i class="fas fa-truck-loading"></i> Sale of Building Materials</h3>
+                        <p>As a leading supplier of construction materials in Juba, we offer a wide range of high-quality building materials at competitive prices. We source our materials from trusted suppliers to ensure durability and reliability.</p>
+                        <p>Whether you're a contractor working on a large project or a homeowner undertaking renovations, we have the materials you need delivered to your site on time.</p>
+                        <ul>
+                            <li>Concrete blocks and bricks</li>
+                            <li>Sand, stones, and aggregate</li>
+                            <li>Marram and soil for construction</li>
+                            <li>Cement and other binding materials</li>
+                            <li>Roofing sheets and materials</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-detail-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Property Rentals">
+                    </div>
+                    <div class="service-text">
+                        <h3><i class="fas fa-key"></i> Property Rentals</h3>
+                        <p>We manage a portfolio of quality residential and commercial properties available for rent in prime locations across Juba. Our rental properties are well-maintained and offer comfortable living and working spaces.</p>
+                        <p>Whether you're looking for a family home, apartment, or commercial space, we can help you find the right property to meet your needs and budget.</p>
+                        <ul>
+                            <li>Residential houses and flats</li>
+                            <li>Commercial office spaces</li>
+                            <li>Retail shop spaces</li>
+                            <li>Short-term and long-term rentals</li>
+                            <li>Property management services</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-detail-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Design Services">
+                    </div>
+                    <div class="service-text">
+                        <h3><i class="fas fa-ruler-combined"></i> Building & Flat Design Services</h3>
+                        <p>Our architectural design team creates innovative and functional building designs tailored to your specific requirements and site conditions. We combine aesthetic appeal with practical functionality to deliver designs that meet both your vision and budget.</p>
+                        <p>We use the latest design software to create detailed plans, 3D visualizations, and technical drawings that guide the construction process from start to finish.</p>
+                        <ul>
+                            <li>Architectural design and planning</li>
+                            <li>3D visualization and modeling</li>
+                            <li>Structural engineering design</li>
+                            <li>Interior design services</li>
+                            <li>Building permit assistance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Portfolio Page -->
+    <section id="portfolio" class="page">
+        <div class="portfolio-hero">
+            <div class="container">
+                <h1>Our Portfolio</h1>
+                <p>Showcasing our completed projects and construction excellence.</p>
+            </div>
+        </div>
+
+        <section class="portfolio-content">
+            <div class="container">
+                <div class="portfolio-filter">
+                    <button class="filter-btn active" data-filter="all">All Projects</button>
+                    <button class="filter-btn" data-filter="residential">Residential</button>
+                    <button class="filter-btn" data-filter="commercial">Commercial</button>
+                    <button class="filter-btn" data-filter="fencing">Fencing</button>
+                </div>
+
+                <div class="portfolio-grid">
+                    <div class="portfolio-item" data-category="residential">
+                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Residential Complex">
+                        <div class="portfolio-overlay">
+                            <h3>Modern Residential Complex</h3>
+                            <p>12-unit complex with modern amenities in Juba</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-category="commercial">
+                        <img src="https://images.unsplash.com/photo-1487956382158-bb926046304a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Office Building">
+                        <div class="portfolio-overlay">
+                            <h3>Commercial Office Building</h3>
+                            <p>Three-story building with retail space in central Juba</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-category="fencing">
+                        <img src="https://images.unsplash.com/photo-1589519160732-57fc498494f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Security Fencing">
+                        <div class="portfolio-overlay">
+                            <h3>Secure Perimeter Fencing</h3>
+                            <p>High-security fencing for government facility</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-category="residential">
+                        <img src="https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Family Home">
+                        <div class="portfolio-overlay">
+                            <h3>Family Residence</h3>
+                            <p>Modern 5-bedroom home with garden in Juba</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-category="commercial">
+                        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Shopping Complex">
+                        <div class="portfolio-overlay">
+                            <h3>Shopping Complex</h3>
+                            <p>Retail complex with 12 shop units and parking</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-category="fencing">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="School Fencing">
+                        <div class="portfolio-overlay">
+                            <h3>School Perimeter Fencing</h3>
+                            <p>Secure fencing for primary school compound</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Contact Page -->
+    <section id="contact" class="page">
+        <div class="contact-hero">
+            <div class="container">
+                <h1>Contact Us</h1>
+                <p>Get in touch with us for your construction and trading needs.</p>
+            </div>
+        </div>
+
+        <section class="contact-content">
+            <div class="container">
+                <div class="contact-container">
+                    <div class="contact-form">
+                        <h2>Send Us a Message</h2>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Your Message</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn">Send Message</button>
+                        </form>
+                    </div>
+
+                    <div class="contact-details">
+                        <h2>Contact Information</h2>
+                        <ul class="contact-info">
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <strong>Address</strong>
+                                    <p>Promise Building Company Limited, Juba, South Sudan</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <strong>Phone</strong>
+                                    <p>+211 985 119 991</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <strong>Email</strong>
+                                    <p>info@promisebuilding.com</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <strong>Business Hours</strong>
+                                    <p>Monday - Friday: 8:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 2:00 PM</p>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.743043099824!2d31.58222257493664!3d4.851370241230401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x171f3a2d0e2e2185%3A0x7a01f12c7ac8c13a!2sJuba%2C%20South%20Sudan!5e0!3m2!1sen!2sus!4v1680000000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Promise Building</h3>
+                    <p>Building Trust, One Structure at a Time. We are committed to excellence in construction and general trading services in South Sudan.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="contact-info">
+                        <li><a href="#home" class="nav-link" data-page="home">Home</a></li>
+                        <li><a href="#about" class="nav-link" data-page="about">About Us</a></li>
+                        <li><a href="#services" class="nav-link" data-page="services">Services</a></li>
+                        <li><a href="#portfolio" class="nav-link" data-page="portfolio">Portfolio</a></li>
+                        <li><a href="#contact" class="nav-link" data-page="contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>Juba, South Sudan</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <div>+211 985 119 991</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <div>info@promisebuilding.com</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Promise Building Company Limited. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    // Mobile Menu Toggle
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const navLinks = document.getElementById('navLinks');
+
+if (mobileMenuBtn && navLinks) {
+    mobileMenuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navLinks.classList.toggle('active');
+        mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+            ? '<i class="fas fa-times"></i>' 
+            : '<i class="fas fa-bars"></i>';
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target) && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+    });
+
+    // Close mobile menu when clicking a link
+    const navLinkItems = document.querySelectorAll('.nav-link');
+    navLinkItems.forEach(link => {
+        link.addEventListener('click', () => {
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+    });
+}
+
+// Page Navigation
+const navLinksList = document.querySelectorAll('.nav-link');
+const pages = document.querySelectorAll('.page');
+
+navLinksList.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Get the target page id
+        const targetPage = link.getAttribute('data-page');
+        
+        // Hide all pages
+        pages.forEach(page => {
+            page.classList.remove('active');
+        });
+        
+        // Show target page
+        document.getElementById(targetPage).classList.add('active');
+        
+        // Update active link
+        navLinksList.forEach(navLink => {
+            navLink.classList.remove('active');
+        });
+        link.classList.add('active');
+        
+        // Close mobile menu if open
+        if (navLinks && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+        
+        // Scroll to top
+        window.scrollTo(0, 0);
+    });
+});
+
+// Typing Animation
+const typingText = document.getElementById('typing-text');
+const texts = [
+    "Building Trust, One Structure at a Time.",
+    "Quality Construction in South Sudan.",
+    "Your Trusted Building Partner.",
+    "Excellence in Construction & Trading."
+];
+
+let textIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let typingSpeed = 100;
+
+function typeText() {
+    if (!typingText) return;
+    
+    const currentText = texts[textIndex];
+    
+    if (isDeleting) {
+        // Deleting text
+        typingText.textContent = currentText.substring(0, charIndex - 1);
+        charIndex--;
+        typingSpeed = 50;
+    } else {
+        // Typing text
+        typingText.textContent = currentText.substring(0, charIndex + 1);
+        charIndex++;
+        typingSpeed = 100;
+    }
+    
+    // Check if text is complete
+    if (!isDeleting && charIndex === currentText.length) {
+        // Pause at the end
+        typingSpeed = 1500;
+        isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+        // Move to next text
+        isDeleting = false;
+        textIndex = (textIndex + 1) % texts.length;
+        typingSpeed = 500;
+    }
+    
+    setTimeout(typeText, typingSpeed);
+}
+
+// Start typing animation after page loads
+window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(typeText, 1000);
+});
+
+// Testimonial Slider
+const testimonialControls = document.querySelectorAll('.testimonial-control');
+const testimonials = document.querySelectorAll('.testimonial');
+
+if (testimonialControls.length > 0 && testimonials.length > 0) {
+    testimonialControls.forEach(control => {
+        control.addEventListener('click', () => {
+            const testimonialId = control.getAttribute('data-testimonial');
+            
+            // Update active testimonial
+            testimonials.forEach(testimonial => {
+                testimonial.classList.remove('active');
+            });
+            
+            document.getElementById(`testimonial-${testimonialId}`).classList.add('active');
+            
+            // Update active control
+            testimonialControls.forEach(ctrl => {
+                ctrl.classList.remove('active');
+            });
+            
+            control.classList.add('active');
+        });
+    });
+
+    // Auto-rotate testimonials
+    let currentTestimonial = 1;
+    function rotateTestimonials() {
+        currentTestimonial = currentTestimonial % 3 + 1;
+        
+        testimonials.forEach(testimonial => {
+            testimonial.classList.remove('active');
+        });
+        
+        testimonialControls.forEach(ctrl => {
+            ctrl.classList.remove('active');
+        });
+        
+        const activeTestimonial = document.getElementById(`testimonial-${currentTestimonial}`);
+        const activeControl = document.querySelector(`.testimonial-control[data-testimonial="${currentTestimonial}"]`);
+        
+        if (activeTestimonial) activeTestimonial.classList.add('active');
+        if (activeControl) activeControl.classList.add('active');
+    }
+    
+    // Set interval for testimonial rotation
+    setInterval(rotateTestimonials, 5000);
+}
+
+// Portfolio Filter
+const filterButtons = document.querySelectorAll('.filter-btn');
+const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+if (filterButtons.length > 0 && portfolioItems.length > 0) {
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Update active filter button
+            filterButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            button.classList.add('active');
+            
+            const filter = button.getAttribute('data-filter');
+            
+            // Filter portfolio items
+            portfolioItems.forEach(item => {
+                if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+}
+
+// Contact Form Validation
+const contactForm = document.getElementById('contactForm');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Get form values
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const message = document.getElementById('message').value.trim();
+        
+        // Simple validation
+        if (!name || !email || !phone || !message) {
+            alert('Please fill in all fields.');
+            return;
+        }
+        
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address.');
+            return;
+        }
+        
+        // Phone validation (basic)
+        const phoneRegex = /^[0-9+\-\s]+$/;
+        if (!phoneRegex.test(phone)) {
+            alert('Please enter a valid phone number.');
+            return;
+        }
+        
+        // In a real application, you would send this data to a server
+        alert('Thank you for your message! We will contact you soon.');
+        contactForm.reset();
+    });
+}
+        });
+    </script>
+</body>
+</html>
