@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Projects | Promise Building Co. Ltd</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Promise<span>Building Co. Ltd</span></a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li class="has-dropdown">
+                        <a href="services.html" class="nav-link">Services <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                        <ul class="dropdown" id="servicesDropdown">
+                            <li><a href="services.html#construction">Construction</a></li>
+                            <li><a href="services.html#realestate">Real Estate</a></li>
+                            <li><a href="services.html#materials">Materials Supply</a></li>
+                            <li><a href="services.html#design">Building Design</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="projects.html" class="nav-link active">Projects</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- Page Hero -->
+    <section class="page-hero projects-bg">
+        <div class="page-hero-content">
+            <h1>Completed Projects</h1>
+            <p>Delivering quality construction, real estate and building solutions.</p>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Our Portfolio</h2>
+
+            <div class="projects-grid">
+
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1470&q=80" alt="Residential Housing Estate">
+                    </div>
+                    <div class="project-info">
+                        <h3>Residential Housing Estate</h3>
+                        <div class="project-location">
+                            <i class="fas fa-map-marker-alt"></i> Project Location
+                        </div>
+                        <p>Development and construction of modern family homes including fencing, road access and utility installation.</p>
+                        <p><strong>Category:</strong> Housing Construction</p>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1470&q=80" alt="Warehouse project">
+                    </div>
+                    <div class="project-info">
+                        <h3>Commercial Warehouse Construction</h3>
+                        <div class="project-location">
+                            <i class="fas fa-map-marker-alt"></i> Project Location
+                        </div>
+                        <p>Design and construction of a reinforced industrial warehouse for storage and logistics operations.</p>
+                        <p><strong>Category:</strong> Commercial Construction</p>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1473&q=80" alt="House Renovation">
+                    </div>
+                    <div class="project-info">
+                        <h3>House Renovation & Finishing</h3>
+                        <div class="project-location">
+                            <i class="fas fa-map-marker-alt"></i> Project Location
+                        </div>
+                        <p>Full renovation including electrical works, tiling, painting, plumbing and exterior finishing.</p>
+                        <p><strong>Category:</strong> Renovation</p>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1470&q=80" alt="Rental Apartments">
+                    </div>
+                    <div class="project-info">
+                        <h3>Rental Apartment Block</h3>
+                        <div class="project-location">
+                            <i class="fas fa-map-marker-alt"></i> Project Location
+                        </div>
+                        <p>Construction of modern rental apartment units for real estate investment development.</p>
+                        <p><strong>Category:</strong> Real Estate Development</p>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1470&q=80" alt="Fence construction">
+                    </div>
+                    <div class="project-info">
+                        <h3>Perimeter Fence Construction</h3>
+                        <div class="project-location">
+                            <i class="fas fa-map-marker-alt"></i> Project Location
+                        </div>
+                        <p>Installation of strong and secure boundary fencing for residential and commercial properties.</p>
+                        <p><strong>Category:</strong> Civil Works</p>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1556912998-c57cc6b63cd7?auto=format&fit=crop&w=1470&q=80" alt="Materials Supply">
+                    </div>
+                    <div class="project-info">
+                        <h3>Building Materials Supply</h3>
+                        <div class="project-location">
+                            <i class="fas fa-map-marker-alt"></i> Various Locations
+                        </div>
+                        <p>Supply and delivery of blocks, sand, stones, marram and aggregates to contractors and clients.</p>
+                        <p><strong>Category:</strong> Materials & Logistics</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+
+                <div class="footer-about">
+                    <div class="footer-logo">Promise<span>Building Co. Ltd</span></div>
+                    <p>We provide reliable construction, real estate and building material solutions with professionalism and integrity.</p>
+                </div>
+
+                <div class="footer-links">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
+                        <li><a href="projects.html"><i class="fas fa-chevron-right"></i> Projects</a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h3 class="footer-heading">Our Services</h3>
+                    <ul>
+                        <li><a href="services.html#construction"><i class="fas fa-chevron-right"></i> Building Construction</a></li>
+                        <li><a href="services.html#realestate"><i class="fas fa-chevron-right"></i> Real Estate & Rentals</a></li>
+                        <li><a href="services.html#materials"><i class="fas fa-chevron-right"></i> Building Materials Supply</a></li>
+                        <li><a href="services.html#design"><i class="fas fa-chevron-right"></i> Building Design</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h3 class="footer-heading">Contact Info</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-phone"></i> +211 985 119 991</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> info@promisebuilding.com</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Company Location</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="copyright">
+                <p>© 2025 Promise Building Co. Ltd. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>
