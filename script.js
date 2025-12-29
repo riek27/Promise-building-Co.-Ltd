@@ -31,10 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (typewriterText && typewriterCursor) {
         const heroTexts = [
-            "Building Excellence in South Sudan",
-            "Premium Residential and Commercial Projects",
-            "Your Vision, Our Expertise",
-            "Transforming Spaces, Building Communities"
+            "Designing Spaces with Innovation",
+            "Quality Construction, Lasting Impact",
+            "Turning Dreams into Reality",
+            "Excellence in Every Structure"
         ];
         
         let txtIndex = 0;
